@@ -1,28 +1,16 @@
 "use client";
 
 import { useState } from "react";
-import toast from "react-hot-toast";
 
 export default function ForgotPasswordPage() {
   const [email, setEmail] = useState("");
 
   const isEmailValid = /^[^\s@]+@cvsu\.edu\.ph$/i.test(email);
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (!email) {
-      toast.error("Email is required.");
-      return;
-    }
-
-    if (!isEmailValid) {
-      toast.error("Please enter a valid @cvsu.edu.ph email address.");
-      return;
-    }
-
-    // Placeholder for actual forgot password request logic
-    toast.success("Password reset link sent to your email.");
+    if (!email || !isEmailValid) return;
   };
 
   return (
@@ -59,9 +47,9 @@ export default function ForgotPasswordPage() {
 
           <button
             type="submit"
-            className="w-full bg-blue-600 text-white font-semibold py-3 rounded-md hover:bg-blue-700 transition"
+            className="w-full cursor-pointer bg-black text-white font-semibold py-3 rounded-md hover:bg-red-800 transition"
           >
-            Send Reset Link
+            Reset Password
           </button>
         </form>
       </div>

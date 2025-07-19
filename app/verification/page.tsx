@@ -1,30 +1,23 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
-import toast from "react-hot-toast";
+import { useState, useRef, useEffect } from "react";
 
 interface VerificationCodePageProps {
   email: string;
   purpose: "registration" | "forgot-password";
-  onVerified: () => void;
-  onResendCode: () => Promise<void>;
 }
 
 export default function VerificationCodePage({
   email,
   purpose,
-  onVerified,
-  onResendCode,
 }: VerificationCodePageProps) {
   const CODE_LENGTH = 6;
   const [codeDigits, setCodeDigits] = useState<string[]>(
     Array(CODE_LENGTH).fill("")
   );
   const inputsRef = useRef<(HTMLInputElement | null)[]>([]);
-  const [loading, setLoading] = useState(false);
   const [resendCooldown, setResendCooldown] = useState(60);
 
-  // Start countdown on mount and when resendCooldown changes
   useEffect(() => {
     if (resendCooldown === 0) return;
 
@@ -35,9 +28,8 @@ export default function VerificationCodePage({
     return () => clearTimeout(timer);
   }, [resendCooldown]);
 
-  // Handle input change
   const handleChange = (index: number, value: string) => {
-    if (!/^\d?$/.test(value)) return; // only single digit number or empty allowed
+    if (!/^\d?$/.test(value)) return;
 
     const newDigits = [...codeDigits];
     newDigits[index] = value;
@@ -48,7 +40,6 @@ export default function VerificationCodePage({
     }
   };
 
-  // Handle keydown for navigation and deletion
   const handleKeyDown = (e: React.KeyboardEvent, index: number) => {
     if (e.key === "Backspace" && !codeDigits[index] && index > 0) {
       const newDigits = [...codeDigits];
@@ -82,58 +73,22 @@ export default function VerificationCodePage({
       }
       return newDigits;
     });
-    // Focus last filled or last input
+
     const focusIndex =
       pasteDigits.length >= CODE_LENGTH ? CODE_LENGTH - 1 : pasteDigits.length;
     inputsRef.current[focusIndex]?.focus();
   };
 
-  const codeString = codeDigits.join("");
-
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (codeString.length !== CODE_LENGTH) {
-      toast.error("Please enter the complete verification code.");
-      return;
-    }
-
-    setLoading(true);
-    try {
-      const res = await fetch("/api/verify-code", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, code: codeString, purpose }),
-      });
-
-      const data = await res.json();
-
-      if (!res.ok) {
-        toast.error(data.error || "Invalid or expired verification code.");
-      } else {
-        toast.success("Verification successful!");
-        onVerified();
-      }
-    } catch {
-      toast.error("Server error. Please try again later.");
-    } finally {
-      setLoading(false);
-    }
+    console.log("Entered Code:", codeDigits.join(""));
   };
 
-  const handleResend = async () => {
+  const handleResend = () => {
     if (resendCooldown > 0) return;
-    setLoading(true);
-    try {
-      await onResendCode();
-      toast.success("Verification code resent.");
-      setResendCooldown(60);
-      setCodeDigits(Array(CODE_LENGTH).fill(""));
-      inputsRef.current[0]?.focus();
-    } catch {
-      toast.error("Failed to resend verification code.");
-    } finally {
-      setLoading(false);
-    }
+    setResendCooldown(60);
+    setCodeDigits(Array(CODE_LENGTH).fill(""));
+    inputsRef.current[0]?.focus();
   };
 
   return (
@@ -159,7 +114,7 @@ export default function VerificationCodePage({
                 inputMode="numeric"
                 maxLength={1}
                 pattern="\d*"
-                className="w-12 h-14 text-center text-2xl font-mono border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
+                className="w-12 h-14 text-center text-2xl font-mono border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-maroon-700 transition"
                 value={digit}
                 onChange={(e) => handleChange(idx, e.target.value)}
                 onKeyDown={(e) => handleKeyDown(e, idx)}
@@ -167,7 +122,6 @@ export default function VerificationCodePage({
                 ref={(el) => {
                   inputsRef.current[idx] = el;
                 }}
-                disabled={loading}
                 autoComplete="one-time-code"
                 required
               />
@@ -176,18 +130,17 @@ export default function VerificationCodePage({
 
           <button
             type="submit"
-            disabled={loading}
-            className="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-md font-semibold transition disabled:opacity-60"
+            className="w-full cursor-pointer bg-black text-white font-semibold py-3 rounded-md hover:bg-red-800 transition"
           >
-            {loading ? "Verifying..." : "Verify"}
+            Verify
           </button>
         </form>
 
         <div className="mt-6 text-center text-gray-500 text-sm">
           <button
             onClick={handleResend}
-            disabled={loading || resendCooldown > 0}
-            className="font-medium text-blue-600 hover:underline disabled:text-gray-400 transition"
+            disabled={resendCooldown > 0}
+            className="font-medium cursor-pointer text-[#800000] hover:underline disabled:text-gray-400 transition"
           >
             {resendCooldown > 0
               ? `Resend code in ${resendCooldown}s`

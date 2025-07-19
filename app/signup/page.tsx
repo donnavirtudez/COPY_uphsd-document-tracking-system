@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import toast from "react-hot-toast";
 
 const DEPARTMENTS = [
   { id: 1, name: "College of Engineering" },
@@ -41,8 +40,6 @@ export default function SignUpPage() {
 
   const [mobileInput, setMobileInput] = useState("");
   const [customPosition, setCustomPosition] = useState("");
-  const [isVerifying, setIsVerifying] = useState(false);
-  const [registeredEmail, setRegisteredEmail] = useState("");
 
   const isEmailValid = /^[^\s@]+@cvsu\.edu\.ph$/i.test(formData.Email);
 
@@ -80,7 +77,7 @@ export default function SignUpPage() {
     }
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
     const {
@@ -107,30 +104,23 @@ export default function SignUpPage() {
       !finalPosition ||
       !EmployeeID
     ) {
-      toast.error("Please fill in all required fields.");
       return;
     }
 
-    if (!isEmailValid) {
-      toast.error("Email must be a valid @cvsu.edu.ph address.");
-      return;
-    }
+    if (!isEmailValid) return;
 
-    if (!isPasswordValid) {
-      toast.error("Password does not meet all strength requirements.");
-      return;
-    }
+    if (!isPasswordValid) return;
 
-    if (mobileInput.length !== 10 || !/^\d{10}$/.test(mobileInput)) {
-      toast.error("Mobile number must be exactly 10 digits.");
-      return;
-    }
+    if (mobileInput.length !== 10 || !/^\d{10}$/.test(mobileInput)) return;
 
     const MobileNumber = `+63${mobileInput}`;
 
-    // You can continue to handle actual submission here
-
-    toast.success("Successfully validated!");
+    // Do something with form data here if needed
+    console.log("Form submitted:", {
+      ...formData,
+      Position: finalPosition,
+      MobileNumber,
+    });
   };
 
   return (
@@ -139,7 +129,6 @@ export default function SignUpPage() {
         <h2 className="text-3xl font-semibold text-center mb-8">Sign Up</h2>
 
         <form className="space-y-6" onSubmit={handleSubmit}>
-          {/* Name */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
               <label
@@ -178,7 +167,6 @@ export default function SignUpPage() {
             </div>
           </div>
 
-          {/* Email */}
           <div>
             <label
               htmlFor="Email"
@@ -208,7 +196,6 @@ export default function SignUpPage() {
             )}
           </div>
 
-          {/* Password */}
           <div>
             <label
               htmlFor="Password"
@@ -242,7 +229,6 @@ export default function SignUpPage() {
             )}
           </div>
 
-          {/* Employee ID */}
           <div>
             <label
               htmlFor="EmployeeID"
@@ -261,7 +247,6 @@ export default function SignUpPage() {
             />
           </div>
 
-          {/* Mobile Number */}
           <div>
             <label
               htmlFor="MobileNumber"
@@ -289,7 +274,6 @@ export default function SignUpPage() {
             </div>
           </div>
 
-          {/* Gender and Department */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
               <label
@@ -341,7 +325,6 @@ export default function SignUpPage() {
             </div>
           </div>
 
-          {/* Position */}
           <div>
             <label
               htmlFor="Position"
@@ -379,10 +362,9 @@ export default function SignUpPage() {
             )}
           </div>
 
-          {/* Submit Button */}
           <button
             type="submit"
-            className="w-full bg-blue-600 text-white font-semibold py-3 rounded-md hover:bg-blue-700 transition"
+            className="w-full cursor-pointer bg-black text-white font-semibold py-3 rounded-md hover:bg-red-800 transition"
           >
             Register
           </button>
