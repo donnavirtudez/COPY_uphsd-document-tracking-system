@@ -13,7 +13,6 @@ export default function Header() {
 
   return (
     <header className={styles.header}>
-
       <div className={styles.logoWrapper}>
         <Image src="/full-logo.png" alt="Logo Icon" width={160} height={160} />
       </div>
@@ -24,9 +23,13 @@ export default function Header() {
         </div>
 
         <div className={styles.authWrapper}>
-          <a href="/login" className={styles.authButton}>Log In</a>
+          <a href="/login" className={styles.authButton}>
+            Log In
+          </a>
           <span className={styles.divider} />
-          <a href="/sign-up" className={styles.authButton}>Sign Up</a>
+          <a href="/signup" className={styles.authButton}>
+            Sign Up
+          </a>
         </div>
 
         <button className={styles.menuButton} onClick={toggleMobileMenu}>
@@ -36,8 +39,12 @@ export default function Header() {
 
       {isMobileMenuOpen && (
         <div className={styles.mobileMenu}>
-          <a href="/login" className={styles.mobileLink}>Log In</a>
-          <a href="/sign-up" className={styles.mobileLink}>Sign Up</a>
+          <a href="/login" className={styles.mobileLink}>
+            Log In
+          </a>
+          <a href="/signup" className={styles.mobileLink}>
+            Sign Up
+          </a>
         </div>
       )}
     </header>
