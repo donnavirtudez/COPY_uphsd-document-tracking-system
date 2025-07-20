@@ -22,7 +22,7 @@ const passionOne = Passion_One({
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Univeristy Of Perpetual Help System DALTA - Las Piñas",
+  title: "University Of Perpetual Help System DALTA - Las Piñas",
   description:
     "This system provides UPSHD Las Piñas staff and administrators with a streamlined platform to track the status of internal document requests, helping ensure faster processing and better coordination across departments.",
 };

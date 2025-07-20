@@ -70,7 +70,27 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    return NextResponse.json({ role: user.role }, { status: 200 });
+    // session token (use JWT or secure ID in real app)
+    const sessionToken = `${user.email}:${Date.now()}`;
+
+    // Set the session cookie
+    const response = NextResponse.json(
+      { role: user.role, message: "Login successful" },
+      { status: 200 }
+    );
+
+    response.cookies.set({
+      name: "session",
+      value: sessionToken,
+      httpOnly: true,  // more secure, not accessible from JS
+      sameSite: "strict",
+      secure: process.env.NODE_ENV === "production",
+      path: "/",
+      maxAge: 60 * 60 * 24 * 7, // 7 days
+    });
+
+    return response;
+
   } catch (error) {
     console.error("Login error:", error);
     return NextResponse.json(
