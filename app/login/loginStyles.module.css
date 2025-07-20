@@ -71,7 +71,7 @@
 
 .rightPanel {
   flex: 1;
-  background-color: #fef6f6;
+  background-color: white;
   padding: 50px 40px;
   display: flex;
   flex-direction: column;
@@ -91,8 +91,8 @@
   color: black;
   margin-bottom: 16px;
   border-radius: 6px;
-  border: 1px solid #ccc;
-  background-color: #e7e7e7;
+  border: 1px solid #800000;
+  background-color: white;
   font-size: 14px;
 }
 
