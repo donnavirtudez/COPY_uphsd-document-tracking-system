@@ -124,9 +124,20 @@ export default function SignUpPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4">
+
+    <div
+  className="min-h-screen bg-[url('/registerbg.png')] bg-cover bg-center flex items-center justify-center p-4 opacity-100 relative"
+>
+  <img
+    src="/full-logo.png" // ← Replace with your logo path
+    alt="Logo"
+    className="absolute top-4 left-4 w-50 h-16" // ← Adjust size as needed
+  /> 
+
+
       <div className="bg-white max-w-3xl w-full rounded-lg shadow-lg p-8">
         <h2 className="text-3xl font-semibold text-center mb-8">Sign Up</h2>
+        <h3 className="text-3xl font-semibold text-red-800 mb-8">Personal Information</h3>
 
         <form className="space-y-6" onSubmit={handleSubmit}>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -362,12 +373,31 @@ export default function SignUpPage() {
             )}
           </div>
 
-          <button
-            type="submit"
-            className="w-full cursor-pointer bg-black text-white font-semibold py-3 rounded-md hover:bg-red-800 transition"
-          >
-            Register
-          </button>
+          <div className="flex space-x-4">
+  <button
+    type="button"
+  className="w-48 h-12 bg-white border-2 border-red-600 text-red-600 font-semibold py-3 rounded-full hover:bg-red-50 transition"
+
+  >
+    Back
+  </button>
+
+
+  <button
+    type="button"
+  className="w-48 h-12 bg-white border-2 border-red-600 text-red-600 font-semibold py-3 rounded-full hover:bg-red-50 transition"
+  >
+    Clear
+  </button>
+
+  <button
+    type="submit"
+    className="w-48 h-12 bg-red-800 text-yellow-400 font-semibold py-3 rounded-full hover:bg-red-700 transition"
+  >
+    Register
+  </button>
+</div>
+
         </form>
       </div>
     </div>
