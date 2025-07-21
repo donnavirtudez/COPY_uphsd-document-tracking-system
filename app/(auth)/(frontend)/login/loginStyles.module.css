@@ -12,7 +12,7 @@
   content: "";
   position: absolute;
   inset: 0;
-  background-color: rgba(128, 0, 0, 0.5); /* maroon overlay */
+  background-color: rgba(128, 0, 0, 0.5); 
   z-index: 0;
 }
 
@@ -22,7 +22,7 @@
   display: flex;
   width: 740px;
   height: auto;
-  max-height: 70vh;
+  max-height: 90vh;
   border-radius: 20px;
   overflow: hidden;
   box-shadow: 0 0 30px rgba(0, 0, 0, 0.4);
@@ -32,7 +32,7 @@
   flex: 1;
   background-color: #7a0c1b;
   color: white;
-  padding: 40px 20px;
+  padding: 20px 20px;
   text-align: center;
   display: flex;
   flex-direction: column;
@@ -40,7 +40,7 @@
 }
 
 .logo {
-  margin: 10px auto 20px;
+  margin: 5px auto 20px;
 }
 
 .leftPanel h2 {
@@ -54,7 +54,7 @@
 }
 
 .leftPanel p {
-  margin: 10px 0;
+  margin: 5px 0;
 }
 
 .mottoBtn {
@@ -72,7 +72,7 @@
 .rightPanel {
   flex: 1;
   background-color: white;
-  padding: 50px 40px;
+  padding: 20px 40px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -89,7 +89,6 @@
 .input {
   padding: 10px;
   color: black;
-  margin-bottom: 16px;
   border-radius: 6px;
   border: 1px solid #800000;
   background-color: white;
@@ -111,7 +110,7 @@
   border-radius: 6px;
   border: none;
   cursor: pointer;
-  margin-top: 10px;
+  margin-top: 20px;
   overflow: hidden;
   z-index: 0;
   transition: color 0.3s ease;
@@ -146,3 +145,100 @@
   display: inline-block;
   text-decoration: none;
 }
+
+.forgotLink:hover {
+  color: #FCCB0A;
+}
+
+.signupPrompt {
+  margin-top: 1rem;
+  font-size: 0.875rem; 
+  text-align: center;
+  color: black; 
+}
+
+.signupLink {
+  color: #7a0c1b;
+  font-weight: 500;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.signupLink:hover {
+  text-decoration: underline;
+  color: #FCCB0A; 
+}
+
+.message {
+  padding-left: 0.5rem;
+  font-size: 0.85rem;
+}
+
+.pass {
+  color: green;
+}
+
+.fail {
+  color: red;
+}
+
+.errorBox {
+  background-color: #ffe6e6;
+  border: 1px solid #ff4d4d;
+  border-radius: 5px;
+  margin-top: 18px;
+  padding: 8px;
+}
+
+.errorText {
+  color: #d8000c;
+  font-size: 0.9rem;
+  margin: 0.2rem 0;
+}
+
+
+
+
+
+/* mobile respo */
+@media (max-width: 768px) {
+
+  
+  .card {
+    flex-direction: column;
+    max-width: 500px;
+    min-height: 20vh;
+    border-radius: 20px;
+  }
+
+  .leftPanel {
+    min-height: ;
+  }
+
+  .logo {
+    align-items: flex-start;
+  }
+
+  .leftPanel h3 {
+  margin: 0;
+  font-size: 22px;
+}
+
+.leftPanel p {
+  display: none;
+}
+
+.mottoBtn {
+  display: none;
+}
+
+  .title {
+  font-size: 24px;
+  }
+
+  .formGroup {
+    flex-direction: column;
+  }
+}
+
+
