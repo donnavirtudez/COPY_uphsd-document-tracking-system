@@ -17,7 +17,7 @@ export default function Login() {
   const router = useRouter();
 
   const [formData, setFormData] = useState<FormData>({ email: "", password: "" });
-  const [isEmailValid, setIsEmailValid] = useState(true);
+  const [isEmailNotValid, setIsEmailNotValid] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
@@ -29,7 +29,7 @@ export default function Login() {
   }));
 
   if (name === "Email") {
-    setIsEmailValid(value.toLowerCase().endsWith("@cvsu.edu.ph"));
+    setIsEmailNotValid(value.toLowerCase().endsWith("@cvsu.edu.ph"));
   }
 }
 
@@ -92,12 +92,14 @@ export default function Login() {
               height={100}
               className={styles.logo}
             />
+            <p>Welcome Perpetualite</p>
             <h2>University of Perpetual Help System DALTA</h2>
             <p>Las Piñas</p>
+            
             <button className={styles.mottoBtn}>
               Character Building is Nation Building
             </button>
-            <p>Welcome</p>
+            
           </div>
 
           <div className={styles.rightPanel}>
@@ -112,20 +114,7 @@ export default function Login() {
                 className={styles.input}
                 required
               />
-              {formData.email && (
-                <p
-                  className={`flex items-center gap-2 text-sm mt-1 ${
-                    isEmailValid ? "text-green-600" : "text-red-600"
-                  }`}
-                >
-                  {isEmailValid ? (
-                    <>✔ Valid email address</>
-                  ) : (
-                    <>✖ Email must end with @cvsu.edu.ph</>
-                  )}
-                </p>
-              )}
-
+              
               <input
                 name="password"
                 type="password"
@@ -135,20 +124,42 @@ export default function Login() {
                 className={styles.input}
                 required
               />
+              </form>
+              
+{formData.email && (
+    <div className={styles.errorBox}>
+      <p className={styles.errorText}>
+         ✖ Email must end with @cvsu.edu.ph
 
+      </p>
+    </div>
+  )}
+              
+
+              
               <button
-                type="submit"
-                disabled={isLoading}
-                className={styles.signInBtn}
-              >
-                {isLoading ? "Signing In..." : "Sign In"}
-              </button>
-            </form>
+  type="button"
+  disabled={isLoading}
+  onClick={handleSubmit}
+  className={styles.signInBtn}
+>
+  {isLoading ? "Logging In..." : "Log In"}
+</button>
+
 
             <a href="/forgotpass" className={styles.forgotLink}>
               Forgot Password?
             </a>
+
+            <p className={styles.signupPrompt}>
+  Don’t have an account?{" "}
+  <a href="/signup" className={styles.signupLink}>
+    Sign up
+  </a>
+</p>
+
           </div>
+          
         </div>
       </div>
     </>
