@@ -7,8 +7,14 @@ export default async function LoginPage() {
   const session = cookieStore.get("session");
 
   if (session) {
-    redirect("/admin/dashboard"); // Already logged in? Skip login.
+    const parts = session.value.split(":");
+    const role = parts[2];
+    if (role === "Admin") {
+      redirect("/admin/dashboard"); // Already logged in? Skip login.
+    } else if (role === "Employee") {
+      redirect("/employee/dashboard");
+    }
   }
-
+  
   return <Login />;
 }

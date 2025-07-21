@@ -31,30 +31,30 @@ export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
 
-    const { Email, Password } = body as { Email: string; Password: string };
+    const { email, password } = body as { email: string; password: string };
 
-    if (!Email || !Password) {
+    if (!email || !password) {
       return NextResponse.json(
         { message: "Email and Password are required." },
         { status: 400 }
       );
     }
 
-    if (!emailRegex.test(Email)) {
+    if (!emailRegex.test(email)) {
       return NextResponse.json(
         { message: "Email is not valid." },
         { status: 400 }
       );
     }
 
-    if (!Email.toLowerCase().endsWith("@cvsu.edu.ph")) {
+    if (!email.toLowerCase().endsWith("@cvsu.edu.ph")) {
       return NextResponse.json(
         { message: "Email must be a valid @cvsu.edu.ph address." },
         { status: 400 }
       );
     }
 
-    const user = await findUserByEmail(Email);
+    const user = await findUserByEmail(email);
 
     if (!user) {
       return NextResponse.json(
@@ -63,7 +63,7 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    if (user.password !== Password) {
+    if (user.password !== password) {
       return NextResponse.json(
         { message: "Invalid email or password." },
         { status: 401 }
@@ -71,7 +71,7 @@ export async function POST(request: NextRequest) {
     }
 
     // session token (use JWT or secure ID in real app)
-    const sessionToken = `${user.email}:${Date.now()}`;
+    const sessionToken = `${user.email}:${Date.now()}: ${user.role}`;
 
     // Set the session cookie
     const response = NextResponse.json(
