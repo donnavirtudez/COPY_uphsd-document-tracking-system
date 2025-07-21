@@ -1,0 +1,70 @@
+.container {
+    height: 100vh;
+    width: 100%;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.headerContainer {
+    background-color: brown;
+    padding: 1rem;
+}
+
+.contentContainer {
+    flex: 1;
+    display: flex;
+    padding: 20px;
+    gap: 20px;
+}
+
+.leftSideBar {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 30px 30px;
+    padding-bottom: 80px;
+    align-self: flex-start;
+    border-radius: 5px;
+    border: 1px solid rgba(0, 0, 0, 0.125);
+    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.1);
+    
+}
+
+.leftSideBar h1 {
+    text-transform: uppercase;
+    text-align: center;
+    font-weight: 600;
+    font-size: 1.75rem;
+}
+
+.adminDashboard {
+    flex: 1;
+    border: 1px solid rgba(0, 0, 0, 0.125);
+    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    
+}
+
+.sidebarMenu {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.sidebarOption {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-transform: capitalize;
+    font-weight: 600;
+    background-color: var(--color-maroon);
+    justify-content: left;
+    padding: 15px 20px;
+    border-radius: 8px;
+    font-size: 1.15rem;
+}
+
+.sidebarOption svg {
+    height: 20px;
+}

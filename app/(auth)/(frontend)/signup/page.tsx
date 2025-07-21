@@ -262,7 +262,6 @@ export default function Signup() {
                 </option>
                 <option value="Male">Male</option>
                 <option value="Female">Female</option>
-              
               </select>
     </div>
         </section>
