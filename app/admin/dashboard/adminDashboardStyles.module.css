@@ -6,65 +6,224 @@
     flex-direction: column;
 }
 
-.headerContainer {
-    background-color: brown;
-    padding: 1rem;
-}
-
 .contentContainer {
     flex: 1;
     display: flex;
     padding: 20px;
-    gap: 20px;
+    gap: 50px;
+    background-color: #D9D9D9;
+    padding: 50px 30px;
 }
 
-.leftSideBar {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    padding: 30px 30px;
-    padding-bottom: 80px;
-    align-self: flex-start;
-    border-radius: 5px;
-    border: 1px solid rgba(0, 0, 0, 0.125);
-    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.1);
-    
-}
-
-.leftSideBar h1 {
-    text-transform: uppercase;
-    text-align: center;
-    font-weight: 600;
-    font-size: 1.75rem;
-}
 
 .adminDashboard {
     flex: 1;
     border: 1px solid rgba(0, 0, 0, 0.125);
-    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.1);
+    box-shadow: 5px 8px 5px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    padding: 30px;
+    gap: 50px;
+}
+
+.dashboardSection {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.dashboardSectionHeader {
+    border-bottom: 2px solid rgba(0, 0, 0, 0.2) ;
+}
+
+.dashboardSectionHeader h1 {
+    font-size: 1.70rem;
+    text-transform: capitalize;
+    font-weight: 600;
+    color: var(--color-maroon);
+    text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.3);
+
+}
+
+
+.dashboardSectionContent {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 40px 80px;
+    justify-content: center;
+    width: max-content;
+    margin: 0 auto;
+
+}
+
+.dashboardSectionContentContainer {
+    background-color: #D9D9D9;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 8px;
+    box-shadow: 1px 3px 3px rgba(0, 0, 0, 0.2);
+    min-height: 175px;
+    width: 325px;
+}
+
+.dashboardSectionContentContainer h1 {
+    font-size: 1.15rem;
+    font-weight: 500;
+    text-transform: capitalize;
+    margin-top: -10px;
+}
+
+.dashboardIconAndCount {
+    display: flex;
+    
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 0 50px;
     
 }
 
-.sidebarMenu {
+.dashboardIconAndCount svg {
+    height: 50px;
+    
+}
+
+.dashboardIconAndCount p {
+    font-size: 5rem;
+    font-weight: 650;
+    color: var(--color-maroon);
+}
+
+
+.userActivitySection {
+    flex: 1;
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 40px;
 }
 
-.sidebarOption {
-    display: flex;
-    align-items: center;
-    gap: 10px;
+.userActivitySectionHeader {
+    border-bottom: 2px solid rgba(0, 0, 0, 0.2) ;
+}
+
+.userActivitySectionHeader h1 {
+    font-size: 1.70rem;
     text-transform: capitalize;
     font-weight: 600;
-    background-color: var(--color-maroon);
-    justify-content: left;
-    padding: 15px 20px;
-    border-radius: 8px;
-    font-size: 1.15rem;
+    color: var(--color-maroon);
+    text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.3);
 }
 
-.sidebarOption svg {
-    height: 20px;
+.userActivitySectionContent {
+    
 }
+
+.userActivitySectionContent .userActivityTable {
+    width: 100%;
+    border: 1px solid #D9D9D9;
+
+}
+
+.userActivityTable thead {
+    background-color: #D9D9D9;
+    height: 50px;
+}
+
+.userActivityTable thead th {
+    text-transform: capitalize;
+    font-size: 1.15rem;
+    font-weight: 400;
+    text-align: center;
+    width: fit-content;
+
+}
+
+
+.userActivityTable tbody td {
+    text-align: center;
+    vertical-align: center;
+    height: 70px;
+    font-size: 1.15rem;
+    width: fit-content;
+}
+
+#columnId {
+}
+
+#columnId .columnIdContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+#columnId .cellProfile {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 20px;
+    min-width: 250px;
+}
+
+#columnId .cellProfile .nameAndEmail {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+#columnId .cellProfile .displayPicture {
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: center;
+    height: 35px;
+    width: 35px;
+}
+
+#columnId .nameAndEmail p, #columnId .nameAndEmail span {
+    text-align: left;
+}
+
+#columnId .nameAndEmail p {
+    text-transform: capitalize;
+}
+
+#columnId .nameAndEmail span {
+    font-weight: 100;
+    margin-top: -10px;
+    color: #403F3F;
+    font-size: 0.85rem;
+}
+
+.activeStatus {
+    background-color: #CAE9EE;
+    color: #177054;
+
+}
+
+.inactiveStatus {
+    background-color: #FFD0D1;
+    color: #7F1416;
+    
+}
+
+.activeStatus, .inactiveStatus {
+    padding: 0 25px;
+    text-transform: capitalize;
+    border-radius: 50px;
+}
+
+#lastLoginDate p, #lastLoginDate span {
+    text-align: center;
+}
+
+#lastLoginDate span {
+    margin-top: -20px;
+    color: #403F3F;
+    font-weight: 100;
+}
+

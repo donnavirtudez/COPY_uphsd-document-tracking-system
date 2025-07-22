@@ -1,12 +1,16 @@
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
+import Image from "next/image";
 import styles from './adminDashboardStyles.module.css';
-import HeaderDashboard from "@/components/shared/header/headerDashboard";
+import HeaderDashboard from "@/components/shared/adminHeader/headerDashboard";
+import AdminSidebar from "@/components/shared/adminSidebar/adminSidebar";
+import dp from "../../../assets/profile-placeholder.jpg";
+
 
 export default async function AdminDashboard() {
-  // ❌ This is async, must await!
-  const cookieStore = await cookies();
-  const session = cookieStore.get("session");
+ 
+  // const cookieStore = await cookies();
+  // const session = cookieStore.get("session");
 
   // console.log("SESSION:", session); // ✅ prints to server logs
 
@@ -16,79 +20,243 @@ export default async function AdminDashboard() {
 
   return (
     <div className={styles.container}>
-      <HeaderDashboard />
+      <div>
+        <HeaderDashboard />
+      </div>
 
       <div className={styles.contentContainer}>
 
-        <div className={styles.leftSideBar}>
-
-          <h1>admin</h1>
-
-          <ul className={styles.sidebarMenu}>
-            
-
-            <li  className={styles.sidebarOption}>
-              <span>
-                <svg width="29" height="29" viewBox="0 0 29 29" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M10.875 2.42047V2.41663H24.164C24.8328 2.41663 25.375 2.96679 25.375 3.61505V25.3849C25.375 26.0468 24.8374 26.5833 24.1746 26.5833H4.82536C4.16242 26.5833 3.625 26.0397 3.625 25.3667V9.66663L10.875 2.42047ZM7.04359 9.66663H10.875V5.83725L7.04359 9.66663ZM13.2917 4.83329V10.875C13.2917 11.5423 12.7507 12.0833 12.0833 12.0833H6.04167V24.1666H22.9583V4.83329H13.2917Z" fill="black"/>
-</svg>
-              </span>
-              user management
-            </li>
-
-            <li className={styles.sidebarOption}>
-      
-              <span>
-                <svg width="29" height="29" viewBox="0 0 29 29" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M24.1665 3.625L26.5832 8.45833V24.1667C26.5832 24.834 26.0422 25.375 25.3748 25.375H3.62484C2.9575 25.375 2.4165 24.834 2.4165 24.1667V8.4626L4.83317 3.625H24.1665ZM24.1665 10.875H4.83317V22.9583H24.1665V10.875ZM15.7082 12.0833V16.9167H19.3332L14.4998 21.75L9.6665 16.9167H13.2915V12.0833H15.7082ZM22.6729 6.04167H6.32735L5.12008 8.45833H23.8812L22.6729 6.04167Z" fill="black"/>
-</svg>
-              </span>
-              documents overview
-            </li>
-
-            <li className={styles.sidebarOption}>
-
-              <span>
-                <svg width="23" height="26" viewBox="0 0 23 26" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M18.2881 6.21149L20.0442 4.45533L21.7531 6.16416L19.9969 7.92033C21.4851 9.78078 22.375 12.1407 22.375 14.7084C22.375 20.7145 17.5061 25.5834 11.5 25.5834C5.49391 25.5834 0.625 20.7145 0.625 14.7084C0.625 8.70228 5.49391 3.83337 11.5 3.83337C14.0677 3.83337 16.4276 4.72328 18.2881 6.21149ZM11.5 23.1667C16.1714 23.1667 19.9583 19.3798 19.9583 14.7084C19.9583 10.037 16.1714 6.25004 11.5 6.25004C6.8286 6.25004 3.04167 10.037 3.04167 14.7084C3.04167 19.3798 6.8286 23.1667 11.5 23.1667ZM10.2917 8.66671H12.7083V15.9167H10.2917V8.66671ZM6.66667 0.208374H16.3333V2.62504H6.66667V0.208374Z" fill="black"/>
-</svg>
-
-              </span>
-              users account
-            </li>
-
-            <li className={styles.sidebarOption}>
-              <span>
-                
-<svg width="27" height="25" viewBox="0 0 27 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M23.1668 0.416748C25.1689 0.416748 26.7918 2.03972 26.7918 4.04175V6.45841H24.3752V20.9584C24.3752 22.9605 22.7523 24.5834 20.7502 24.5834H3.8335C1.83147 24.5834 0.208496 22.9605 0.208496 20.9584V18.5417H19.5418V20.9584C19.5418 21.578 20.0082 22.0888 20.6093 22.1586L20.7502 22.1667C21.3698 22.1667 21.8806 21.7003 21.9504 21.0993L21.9585 20.9584V2.83341H6.25016C5.63048 2.83341 5.11976 3.29988 5.04996 3.90083L5.04183 4.04175V16.1251H2.62516V4.04175C2.62516 2.03972 4.24814 0.416748 6.25016 0.416748H23.1668Z" fill="black"/>
-</svg>
-
-              </span>
-              activity logs
-            </li>
-
-            <li className={styles.sidebarOption}>
-              <span>
-              <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M0.416504 12.4998C0.416504 11.4552 0.549058 10.4415 0.798277 9.47471C2.11569 9.543 3.42342 8.88726 4.12826 7.66645C4.83256 6.44655 4.74724 4.98744 4.03088 3.88097C5.47161 2.46514 7.26572 1.40776 9.26879 0.853271C9.86833 2.0284 11.0901 2.83311 12.4998 2.83311C13.9096 2.83311 15.1313 2.0284 15.7309 0.853271C17.734 1.40776 19.5281 2.46514 20.9688 3.88097C20.2524 4.98744 20.1671 6.44655 20.8714 7.66645C21.5762 8.88726 22.884 9.543 24.2015 9.47471C24.4506 10.4415 24.5832 11.4552 24.5832 12.4998C24.5832 13.5444 24.4506 14.558 24.2015 15.5248C22.884 15.4565 21.5762 16.1123 20.8714 17.3331C20.1671 18.553 20.2524 20.0121 20.9688 21.1186C19.5281 22.5344 17.734 23.5918 15.7309 24.1463C15.1313 22.9712 13.9096 22.1664 12.4998 22.1664C11.0901 22.1664 9.86833 22.9712 9.26879 24.1463C7.26572 23.5918 5.47161 22.5344 4.03088 21.1186C4.74724 20.0121 4.83256 18.553 4.12826 17.3331C3.42342 16.1123 2.11569 15.4565 0.798277 15.5248C0.549058 14.558 0.416504 13.5444 0.416504 12.4998ZM6.22116 16.1248C6.98253 17.4435 7.20079 18.9596 6.90305 20.3827C7.3958 20.7333 7.92031 21.0371 8.46991 21.2895C9.55363 20.3194 10.9764 19.7498 12.4998 19.7498C14.0233 19.7498 15.446 20.3194 16.5297 21.2895C17.0793 21.0371 17.6038 20.7333 18.0966 20.3827C17.7989 18.9596 18.0171 17.4435 18.7786 16.1248C19.5398 14.8061 20.7437 13.8591 22.1248 13.4054C22.1525 13.106 22.1665 12.804 22.1665 12.4998C22.1665 12.1956 22.1525 11.8935 22.1248 11.5942C20.7437 11.1405 19.5398 10.1935 18.7786 8.87478C18.0171 7.55604 17.7989 6.03998 18.0966 4.61689C17.6038 4.26627 17.0793 3.96248 16.5297 3.71C15.446 4.6802 14.0233 5.24978 12.4998 5.24978C10.9764 5.24978 9.55363 4.6802 8.46991 3.71C7.92031 3.96248 7.3958 4.26627 6.90305 4.61689C7.20079 6.03998 6.98253 7.55604 6.22116 8.87478C5.4598 10.1935 4.25603 11.1405 2.87487 11.5942C2.84715 11.8935 2.83317 12.1956 2.83317 12.4998C2.83317 12.804 2.84715 13.106 2.87487 13.4054C4.25603 13.8591 5.4598 14.8061 6.22116 16.1248ZM12.4998 16.1248C10.4977 16.1248 8.87484 14.5018 8.87484 12.4998C8.87484 10.4978 10.4977 8.87478 12.4998 8.87478C14.5019 8.87478 16.1248 10.4978 16.1248 12.4998C16.1248 14.5018 14.5019 16.1248 12.4998 16.1248ZM12.4998 13.7081C13.1672 13.7081 13.7082 13.1671 13.7082 12.4998C13.7082 11.8324 13.1672 11.2914 12.4998 11.2914C11.8325 11.2914 11.2915 11.8324 11.2915 12.4998C11.2915 13.1671 11.8325 13.7081 12.4998 13.7081Z" fill="black"/>
-</svg>
-              </span>
-              setting
-            </li>
-
-          </ul>
-
-        </div>
+        <AdminSidebar />
 
         <div className={styles.adminDashboard}>
 
-           asdsadas
+           <div className={styles.dashboardSection}>
+
+              <div className={styles.dashboardSectionHeader}>
+                <h1>
+                  admin dashboard
+                </h1>
+              </div>
+
+              <div className={styles.dashboardSectionContent}>
+
+                <div className={styles.dashboardSectionContentContainer}>
+                  
+                  <div className={styles.dashboardIconAndCount}>
+
+                    <svg width="40" height="34" viewBox="0 0 40 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M28.3332 32V28.6667C28.3332 26.8986 27.6308 25.2029 26.3805 23.9526C25.1303 22.7024 23.4346 22 21.6665 22H8.33317C6.56506 22 4.86937 22.7024 3.61913 23.9526C2.36888 25.2029 1.6665 26.8986 1.6665 28.6667V32M38.3332 32V28.6667C38.3321 27.1895 37.8404 25.7546 36.9354 24.5872C36.0305 23.4198 34.7634 22.5859 33.3332 22.2167M26.6665 2.21667C28.1005 2.58384 29.3716 3.41784 30.2792 4.58718C31.1869 5.75653 31.6796 7.19472 31.6796 8.675C31.6796 10.1553 31.1869 11.5935 30.2792 12.7628C29.3716 13.9322 28.1005 14.7662 26.6665 15.1333M21.6665 8.66667C21.6665 12.3486 18.6817 15.3333 14.9998 15.3333C11.3179 15.3333 8.33317 12.3486 8.33317 8.66667C8.33317 4.98477 11.3179 2 14.9998 2C18.6817 2 21.6665 4.98477 21.6665 8.66667Z" stroke="#1E1E1E" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+                    <p>
+                      500
+                    </p>
+
+                  </div>
+
+                  <h1>
+                    total users
+                  </h1>
+                </div>
+
+                <div className={styles.dashboardSectionContentContainer}>
+
+                  <div className={styles.dashboardIconAndCount}>
+
+                    <svg width="32" height="38" viewBox="0 0 32 38" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M19.3332 2.33337H5.99984C5.11578 2.33337 4.26794 2.68456 3.64281 3.30968C3.01769 3.93481 2.6665 4.78265 2.6665 5.66671V32.3334C2.6665 33.2174 3.01769 34.0653 3.64281 34.6904C4.26794 35.3155 5.11578 35.6667 5.99984 35.6667H25.9998C26.8839 35.6667 27.7317 35.3155 28.3569 34.6904C28.982 34.0653 29.3332 33.2174 29.3332 32.3334V12.3334M19.3332 2.33337L29.3332 12.3334M19.3332 2.33337V12.3334H29.3332M22.6665 20.6667H9.33317M22.6665 27.3334H9.33317M12.6665 14H9.33317" stroke="#1E1E1E" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+
+                    <p>
+                      45
+                    </p>
+
+                  </div>
+
+                  <h1>
+                    total documents
+                  </h1>
+
+                </div>
+
+                <div className={styles.dashboardSectionContentContainer}>
+
+                  <div className={styles.dashboardIconAndCount}>
+
+                    <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M32.4838 9.46305L35.7136 6.6947L38.8562 9.38844L35.6264 12.1568C38.3633 15.0895 40 18.8095 40 22.8571C40 32.325 31.0458 40 20 40C8.95431 40 0 32.325 0 22.8571C0 13.3894 8.95431 5.71429 20 5.71429C24.7222 5.71429 29.0622 7.11709 32.4838 9.46305ZM20 36.1905C28.5911 36.1905 35.5556 30.221 35.5556 22.8571C35.5556 15.4934 28.5911 9.52381 20 9.52381C11.4089 9.52381 4.44444 15.4934 4.44444 22.8571C4.44444 30.221 11.4089 36.1905 20 36.1905ZM17.7778 13.3333H22.2222V24.7619H17.7778V13.3333ZM11.1111 0H28.8889V3.80952H11.1111V0Z" fill="black"/>
+</svg>
+
+                    <p>
+                      23
+                    </p>
+
+                  </div>
+
+                  <h1>
+                    pending approvals
+                  </h1>
+
+                </div>
+
+                <div className={styles.dashboardSectionContentContainer}>
+
+                <div className={styles.dashboardIconAndCount}>
+
+                    <svg width="34" height="30" viewBox="0 0 34 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M33.3333 30H0V26.6667H1.66667V1.66667C1.66667 0.7462 2.41287 0 3.33333 0H26.6667C27.5872 0 28.3333 0.7462 28.3333 1.66667V10H31.6667V26.6667H33.3333V30ZM25 26.6667H28.3333V13.3333H18.3333V26.6667H21.6667V16.6667H25V26.6667ZM25 10V3.33333H5V26.6667H15V10H25ZM8.33333 13.3333H11.6667V16.6667H8.33333V13.3333ZM8.33333 20H11.6667V23.3333H8.33333V20ZM8.33333 6.66667H11.6667V10H8.33333V6.66667Z" fill="black"/>
+</svg>
+          <p>
+                      18
+                    </p>
+
+                  </div>
+
+                  <h1>
+                    departments
+                  </h1>
+
+                </div>
+
+              </div>
+
+           </div>
+
+           <div className={styles.userActivitySection}>
+              <div className={styles.userActivitySectionHeader}>
+                <h1>
+                  recent user activity
+                </h1>
+              </div>
+
+              <div className={styles.userActivitySectionContent}>
+                <table className={styles.userActivityTable}>
+                  <thead>
+                    <th>name</th>
+                    <th>department</th>
+                    <th>role</th>
+                    <th>status</th>
+                    <th>last login</th>
+                    <th>action</th>
+                  </thead>
+                  <tbody>
+
+                    <tr>
+                      <td id={styles.columnId}>
+                      <div className={styles.columnIdContainer}>
+                        <div className={styles.cellProfile}>
+                        <Image src={dp} alt="display picture" className={styles.displayPicture} />
+                      <div className={styles.nameAndEmail}>
+                        <p>
+                          Alexander Fernandez
+                        </p>
+                        <span>
+                          a.fernandez@uphsd.edu.ph
+                        </span>
+                      </div>
+                      </div>
+                      </div>
+                    </td>
+                    <td>HR Department</td>
+                    <td>Department Head</td>
+                    <td>
+                        <p className={styles.activeStatus}>
+                          active
+                        </p>
+                      </td>
+                    <td id={styles.lastLoginDate}>
+                      <p>July 5, 2025</p>
+                      <span>
+                        10:30AM
+                      </span>
+                    </td>
+                    <td>View</td>
+                    </tr>
+
+                    <tr>
+                      <td id={styles.columnId}>
+                      <div className={styles.columnIdContainer}>
+
+                        <div className={styles.cellProfile}>
+
+                          <Image src={dp} alt="display picture" className={styles.displayPicture} />
+
+                          <div className={styles.nameAndEmail}>
+                          <p>
+                            jerald labalan
+                          </p>
+                          <span>
+                            j.labalan@uphsd.edu.ph
+                          </span>
+                          </div>
+
+                        </div>
+
+                      </div>
+                    </td>
+                    <td>College of Medicine</td>
+                    <td>Staff</td>
+                    <td>
+                        <p className={styles.inactiveStatus}>
+                          inactive
+                        </p>
+                      </td>
+                    <td id={styles.lastLoginDate}>
+                      <p>July 5, 2025</p>
+                      <span>
+                        10:30AM
+                      </span>
+                    </td>
+                    <td>View</td>
+                    </tr>
+
+                    <tr>
+                      <td id={styles.columnId}>
+                      <div className={styles.columnIdContainer}>
+
+                        <div className={styles.cellProfile}>
+                          
+                          <Image src={dp} alt="display picture" className={styles.displayPicture} />
+
+                          <div className={styles.nameAndEmail}>
+                          <p>
+                            neil yvan caliwan
+                          </p>
+                          <span>
+                            n.caliwant@uphsd.edu.ph
+                          </span>
+                          </div>
+
+                        </div>
+
+                      </div>
+                    </td>
+                    <td>HR Department</td>
+                    <td>Department Head</td>
+                    <td>
+                        <p className={styles.activeStatus}>
+                          active
+                        </p>
+                      </td>
+                    <td id={styles.lastLoginDate}>
+                      <p>July 5, 2025</p>
+                      <span>
+                        10:30AM
+                      </span>
+                    </td>
+                    <td>View</td>
+                    </tr>
+
+                    
+
+                  </tbody>
+                </table>
+              </div>
+           </div>
 
         </div>
 
       </div>
-      
+
     </div>
   );
 }
