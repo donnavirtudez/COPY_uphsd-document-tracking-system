@@ -1,6 +1,7 @@
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import styles from './adminDashboardStyles.module.css';
+import HeaderDashboard from "@/components/shared/header/headerDashboard";
 
 export default async function AdminDashboard() {
   // ❌ This is async, must await!
@@ -15,9 +16,7 @@ export default async function AdminDashboard() {
 
   return (
     <div className={styles.container}>
-      <div className={styles.headerContainer}>
-        header 
-      </div>
+      <HeaderDashboard />
 
       <div className={styles.contentContainer}>
 

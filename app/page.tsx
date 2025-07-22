@@ -3,6 +3,7 @@ import styles from "./styles/styles.module.css";
 import Header from "@/components/shared/header";
 import { FileText, Eye, Settings, ClipboardList } from "lucide-react";
 
+
 export default function Home() {
   const cards = [
     {
