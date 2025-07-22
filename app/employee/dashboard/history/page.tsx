@@ -1,36 +1,42 @@
-"use client";
 
 import Head from 'next/head'
-import styles from './document.module.css'
-import { useState } from 'react';
+import styles from './history.module.css'
 
 const documents = [
   {
     title: 'IT Equipment Purchase Request',
-    fileType: 'PDF File',
+    Aprrove: 'SD',
     status: 'Pending',
-    date: 'July 5, 2025',
+    created: 'July 5, 2025',
+    Completed: 'July 5, 2025',
   },
   {
     title: 'Student Grades',
-    fileType: 'PDF File',
+    Aprrove: 'Antonio Orcales',
     status: 'Completed',
-    date: 'July 5, 2025',
+    created: 'July 5, 2025',
+     Completed: 'July 10, 2025',
   },
   {
     title: 'Student Good Moral Request',
-    fileType: 'PDF File',
+    Aprrove: 'Antonio Orcales',
     status: 'Pending',
-    date: 'July 5, 2025',
+    created: 'July 5, 2025',
+    Completed: 'July 10, 2025',
+  },
+
+  {
+    title: 'Request Form',
+    Aprrove: 'Antonio Orcales',
+    status: 'Pending',
+    created: 'July 5, 2025',
+    Completed: 'July 10, 2025',
+    
   },
 ];
 
 
-export default function Document() {
-
-  const [sidebarOpen, setSidebarOpen] = useState(false);
-
-
+export default function History() {
   return (
    <>
    <div className={styles.Maincontainer}> 
@@ -49,16 +55,11 @@ export default function Document() {
           <span>Welcome, Kurt Macaranas</span>
           <div>
             <img src="/profile.png" alt="Profile" className={styles.profilePic} />
+            
           </div>
-
-          {/* Hamburger Button */}
-          <button
-            className={styles.hamburger}
-            onClick={() => setSidebarOpen(!sidebarOpen)}
-          >
-            ☰
-          </button>
         </div>
+
+        
       </header>
 
       <div className={styles.container}>
@@ -66,8 +67,8 @@ export default function Document() {
           <p className={styles.role}>👤 IT COORDINATOR</p>
           <ul>
             <li>📂 Dashboard</li>
-            <li className={styles.active}>📄 My Documents</li>
-            <li>🕘 History</li>
+            <li>📄 My Documents</li>
+            <li className={styles.active}>🕘 History</li>
             <li>⚙️ Settings</li>
           </ul>
         </aside>
@@ -78,26 +79,8 @@ export default function Document() {
         <main className={styles.main}>
      <div className={styles.Maincontainer}>
   <div className={styles.headerRow}>
-    <h1 className={styles.heading}>My Documents</h1>
-    <button className={styles.createButton}>
-      <span>+</span> Create New Document
-    </button>
-  </div>
-
-
-  <div className={styles.cards}>
-    <div className={`${styles.card} ${styles.red}`}>
-      <span className={styles.count}>6</span>
-      <p>Total Documents</p>
-    </div>
-    <div className={`${styles.card} ${styles.blue}`}>
-      <span className={styles.count}>12</span>
-      <p>In Process</p>
-    </div>
-    <div className={`${styles.card} ${styles.green}`}>
-      <span className={styles.count}>23</span>
-      <p>Completed</p>
-    </div>
+    <h1 className={styles.heading}>History</h1>
+    
   </div>
 
 
@@ -137,9 +120,10 @@ export default function Document() {
         <thead>
           <tr className={styles.tableHeader}>
             <th>Document</th>
-            <th>File</th>
-            <th>Status</th>
-            <th>Date</th>
+            <th>Approved by</th>
+            <th>Department</th>
+            <th>Created</th>
+            <th>Completed</th>
             <th>Action</th>
           </tr>
         </thead>
@@ -147,7 +131,7 @@ export default function Document() {
           {documents.map((doc, index) => (
             <tr key={index}>
               <td>{doc.title}</td>
-              <td>{doc.fileType}</td>
+              <td>{doc.Aprrove}</td>
               <td>
                 <span
                   className={
@@ -159,7 +143,8 @@ export default function Document() {
                   {doc.status}
                 </span>
               </td>
-              <td>{doc.date}</td>
+              <td>{doc.created}</td>
+              <td>{doc.Completed}</td>
               <td>
                 <a href="#">View</a> | <a href="#">Edit</a> | <a href="#">Delete</a>
               </td>

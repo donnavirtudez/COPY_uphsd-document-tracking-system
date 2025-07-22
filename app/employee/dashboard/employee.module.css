@@ -162,3 +162,162 @@
   display: inline-block;
   margin-top: 8px;
 }
+
+.hamburger {
+  display: none;
+  font-size: 24px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  margin-left: 16px;
+  color: white;
+}
+
+
+/* Responsive for tablets */
+@media (max-width: 1024px) {
+  .container {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+    border-right: none;
+    border-bottom: 1px solid #ddd;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: space-between;
+  }
+
+  .sidebar ul {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .main {
+    padding: 24px;
+  }
+
+  .cards {
+    flex-direction: column;
+  }
+
+  .card {
+    width: 100%;
+  }
+
+  .documentCard {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .header {
+    flex-direction: column;
+    gap: 12px;
+    text-align: center;
+  }
+}
+
+
+@media (max-width: 768px) {
+  .sidebar {
+    position: fixed;
+    top: 10px; /* height of your header */
+    left: -240px;
+    width: 220px;
+    height: calc(100% - 300px);
+    background: rgb(214, 19, 19);
+    border-right: 1px solid #ddd;
+    padding: 24px;
+    transition: left 0.3s ease-in-out;
+    z-index: 1000;
+  }
+
+  .sidebarOpen {
+    left: 0;
+  }
+
+  .hamburger {
+    display: block;
+  }
+
+  .container {
+    flex-direction: column;
+  }
+
+  .headerRight {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+}
+
+/* Responsive for mobile phones */
+@media (max-width: 600px) {
+  .header {
+    padding: 12px 16px;
+  }
+
+  .headerLeft h1 {
+    font-size: 16px;
+  }
+
+  .headerLeft p {
+    font-size: 10px;
+  }
+
+  .logo {
+    height: 60px;
+  }
+
+  .userInitials {
+    font-size: 12px;
+    padding: 3px 10px;
+  }
+
+  .sidebar {
+    padding: 16px;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .sidebar ul {
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+  }
+
+  .sidebar li {
+    width: 100%;
+    text-align: center;
+  }
+
+  .main {
+    padding: 16px;
+  }
+
+  .cards {
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .card {
+    width: 100%;
+  }
+
+  .documentCard {
+    padding: 12px 16px;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .recentTitle {
+    font-size: 16px;
+  }
+
+  .title {
+    font-size: 20px;
+  }
+}

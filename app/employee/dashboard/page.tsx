@@ -1,7 +1,13 @@
+"use client";
+
 import Head from 'next/head'
+import { useState } from 'react';
 import styles from './employee.module.css'
 
 export default function Dashboard() {
+
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+
   return (
     <>
       <Head>
@@ -11,21 +17,29 @@ export default function Dashboard() {
       <header className={styles.header}>
         <div className={styles.headerLeft}>
           <img src="/full-logo.png" alt="Logo" className={styles.logo} />
-       
         </div>
-
 
         <div className={styles.headerRight}>
           <span>Welcome, Kurt Macaranas</span>
           <div>
             <img src="/profile.png" alt="Profile" className={styles.profilePic} />
-            
           </div>
+
+          {/* Hamburger Button */}
+          <button
+            className={styles.hamburger}
+            onClick={() => setSidebarOpen(!sidebarOpen)}
+          >
+            ☰
+          </button>
         </div>
       </header>
 
       <div className={styles.container}>
-        <aside className={styles.sidebar}>
+        {/* Sidebar */}
+        <aside
+          className={`${styles.sidebar} ${sidebarOpen ? styles.sidebarOpen : ''}`}
+        >
           <p className={styles.role}>👤 IT COORDINATOR</p>
           <ul>
             <li className={styles.active}>📂 Dashboard</li>
