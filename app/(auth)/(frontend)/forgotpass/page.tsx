@@ -1,58 +1,115 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
+import styles from "./forgotPassStyles.module.css";
+import toast, { Toaster } from "react-hot-toast";
+import { useRouter } from "next/navigation";
 
-export default function ForgotPasswordPage() {
-  const [email, setEmail] = useState("");
+type FormData = {
+  email: string;
+};
 
-  const isEmailValid = /^[^\s@]+@cvsu\.edu\.ph$/i.test(email);
+export default function ForgotPass() {
+  const router = useRouter();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const [formData, setFormData] = useState<FormData>({ email: "" });
+  const [isEmailValid, setIsEmailValid] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
+
+  function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
+    const { name, value } = e.target;
+
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+
+    if (name === "email") {
+      setIsEmailValid(value.toLowerCase().endsWith("@cvsu.edu.ph"));
+    }
+  }
+
+  async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
 
-    if (!email || !isEmailValid) return;
-  };
+    if (!formData.email.toLowerCase().endsWith("@cvsu.edu.ph")) {
+      toast.error("Email must be a valid @cvsu.edu.ph address.");
+      return;
+    }
+
+    setIsLoading(true);
+    toast.success("OTP sent to your email!");
+
+
+    setTimeout(() => {
+      router.push("/forgotpass/OTP"); 
+    }, 1500);
+  }
 
   return (
-    <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4">
-      <div className="bg-white max-w-md w-full rounded-lg shadow-lg p-8">
-        <h2 className="text-2xl font-semibold text-center mb-6">
-          Forgot Password
-        </h2>
-
-        <form className="space-y-6" onSubmit={handleSubmit}>
-          <div>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              placeholder="Email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-              required
+    <>
+      <Toaster position="top-center" reverseOrder={false} />
+      <div className={styles.background}>
+        <div className={styles.card}>
+          
+          <div className={styles.leftPanel}>
+            <Image
+              src="/logo.png"
+              alt="Logo"
+              width={100}
+              height={100}
+              className={styles.logo}
             />
-            {email && (
-              <p className="mt-1 text-sm">
-                {isEmailValid ? (
-                  <span className="text-green-600">✔ Valid email address</span>
-                ) : (
-                  <span className="text-red-600">
-                    ✖ Email must end with @cvsu.edu.ph
-                  </span>
-                )}
-              </p>
-            )}
+            <p>Welcome Perpetualite</p>
+            <h2>University of Perpetual Help System DALTA</h2>
+            <p>Las Piñas</p>
+            <button className={styles.mottoBtn}>
+              Character Building is Nation Building
+            </button>
           </div>
 
-          <button
-            type="submit"
-            className="w-full cursor-pointer bg-black text-white font-semibold py-3 rounded-md hover:bg-red-800 transition"
-          >
-            Reset Password
-          </button>
-        </form>
+       
+          <div className={styles.rightPanel}>
+            <h2 className={styles.Title}>Forgot Password</h2>
+            <p className={styles.description}>
+              Enter your email address to receive a verification code.
+            </p>
+
+            <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+              <input
+                name="email"
+                type="email"
+                placeholder="Email"
+                onChange={handleChange}
+                value={formData.email}
+                className={styles.input}
+                required
+              />
+
+              {!isEmailValid && formData.email && (
+                <div className={styles.errorBox}>
+                  <p className={styles.errorText}>
+                    ✖ Email must end with @cvsu.edu.ph
+                  </p>
+                </div>
+              )}
+
+              <button
+                type="submit"
+                disabled={isLoading}
+                className={styles.signInBtn}
+              >
+                {isLoading ? "Sending OTP..." : "Send OTP"}
+              </button>
+            </form>
+
+            <a href="/login" className={styles.forgotLink}>
+              Back to Login
+            </a>
+          </div>
+        </div>
       </div>
-    </div>
+    </>
   );
 }

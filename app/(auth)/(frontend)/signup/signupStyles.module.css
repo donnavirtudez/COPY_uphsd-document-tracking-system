@@ -183,8 +183,10 @@
 }
 
 .errorBox + .buttonGroup {
-  margin-top: 30px; /* Extra breathing room */
+  margin-top: 30px; 
 }
+
+
 
 
 
