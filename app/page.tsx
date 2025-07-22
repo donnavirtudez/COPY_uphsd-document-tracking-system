@@ -1,6 +1,6 @@
 import Image from "next/image";
 import styles from "./styles/styles.module.css";
-import Header from "@/components/shared/header";
+import Header from "@/components/shared/adminHeader";
 import { FileText, Eye, Settings, ClipboardList } from "lucide-react";
 
 
