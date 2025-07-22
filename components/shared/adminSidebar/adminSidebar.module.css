@@ -1,0 +1,82 @@
+.leftSideBar {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 30px 30px;
+    padding-bottom: 80px;
+    align-self: flex-start;
+    border-radius: 5px;
+    border: 1px solid rgba(0, 0, 0, 0.125);
+    box-shadow: 5px 8px 5px rgba(0, 0, 0, 0.1);
+    background-color: white;
+    max-width: 300px;
+    
+}
+
+.leftSideBar h1 {
+    text-transform: uppercase;
+    text-align: center;
+    font-weight: 600;
+    font-size: 1.75rem;
+}
+
+.sidebarMenu {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.sidebarOption {
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    border-radius: 8px;
+    transition: background-color 0.3s ease-out;
+}
+
+
+.sidebarOption a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-transform: capitalize;
+    font-weight: 600;
+    justify-content: left;
+    padding: 15px 20px;
+    border-radius: 8px;
+    font-size: 1.15rem;
+}
+
+.sidebarOption .sidebarMenuIcon {
+    height: 29px;
+    width: 29px;
+}
+
+.sidebarOption .sidebarIconFill {
+    fill: black;
+}
+
+.sidebarOption:hover {
+    cursor: pointer;
+    background-color: var(--color-maroon);
+    color: var(--color-yellow);
+}
+
+.sidebarOption:hover .sidebarIconFill {
+    fill: var(--color-yellow);
+}
+
+.sidebarOption.active {
+    background-color: var(--color-maroon);
+    color: var(--color-yellow);
+}
+
+.sidebarOption.active .sidebarIconFill {
+    fill: var(--color-yellow);
+}
+
+.sidebarOption:focus {
+    outline: none;
+    background-color: var(--color-maroon);
+    color: var(--color-yellow);
+}

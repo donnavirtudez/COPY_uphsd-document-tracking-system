@@ -3,9 +3,10 @@
   justify-content: space-between;
   align-items: center;
   background-color: #871919;
-  padding: 0.75rem 1.5rem;
+  padding: 0 100px;
   color: white;
   position: relative;
+  height: 100px;
 }
 
 .logoWrapper {
@@ -68,6 +69,15 @@
 
 
 @media (max-width: 768px) {
+
+  .logoWrapper {
+    width: 180px; 
+  }
+
+  .logoWrapper img {
+    width: 100%;
+    height: auto;
+  }
   .authWrapper {
     display: none;
   }
@@ -142,5 +152,50 @@
 
   .closeButton {
     border: none;
+  }
+}
+
+
+/* header dashboard */
+
+.rightWrapper {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.userInfo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.userIcon {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background-color: #FCCB0A;
+  color: #7F1416;
+  font-weight: bold;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
+}
+
+.userName {
+  font-size: 16px;
+  font-weight: 500;
+  color: white;
+}
+
+@media (max-width: 768px) {
+  .userName {
+    display: none;
+  }
+
+  .userInfo {
+    padding-right: 0.25rem;
   }
 }
