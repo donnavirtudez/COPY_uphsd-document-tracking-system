@@ -101,7 +101,7 @@ export default function SignUpOtpPage() {
               </div>
             </form>
 
-            {/* Button is outside the form */}
+    
             <button
               onClick={handleSubmit}
               disabled={isLoading}

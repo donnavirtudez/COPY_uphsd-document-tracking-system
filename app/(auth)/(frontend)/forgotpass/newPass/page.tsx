@@ -40,7 +40,7 @@ export default function NewPasswordPage() {
       <Toaster position="top-center" reverseOrder={false} />
       <div className={styles.background}>
         <div className={styles.card}>
-          {/* Left Panel */}
+
           <div className={styles.leftPanel}>
             <Image
               src="/logo.png"
@@ -57,7 +57,7 @@ export default function NewPasswordPage() {
             </button>
           </div>
 
-          {/* Right Panel */}
+       
           <div className={styles.rightPanel}>
             <h2 className={styles.Title}>Set New Password</h2>
             <p className={styles.description}>

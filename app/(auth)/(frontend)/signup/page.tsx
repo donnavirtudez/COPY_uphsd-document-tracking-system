@@ -166,7 +166,7 @@ export default function Signup() {
       <form className={styles.card} onSubmit={handleSubmit}>
         <h2 className={styles.title}>Create an account</h2>
 
-        {/* Personal Info */}
+
         <section>
           <h3 className={styles.sectionTitle}>Personal Information</h3>
           <div className={styles.formGroup}>
@@ -262,7 +262,7 @@ export default function Signup() {
           </div>
         </section>
 
-        {/* Work Info */}
+
         <section>
           <h3 className={styles.sectionTitle}>Position Details</h3>
           <div className={styles.form}>
