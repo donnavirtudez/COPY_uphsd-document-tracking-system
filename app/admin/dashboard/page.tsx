@@ -11,6 +11,8 @@ export default async function AdminDashboard() {
 
   // if (!session) {
   //   redirect("/login"); // or wherever you want
+  // } else if (session.value !== "Admin" and session.value === "Employee") {
+  //   redirect("/employee/dashboard"); // or wherever you want
   // }
 
   return (
