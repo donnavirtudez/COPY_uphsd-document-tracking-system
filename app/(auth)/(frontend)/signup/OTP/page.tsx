@@ -30,8 +30,9 @@ export default function SignUpOtpPage() {
     }
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
   const trimmedOtp = otp.map((d) => d.trim());
+  const code = trimmedOtp.join("");
   const isValid = trimmedOtp.every((digit) => /^\d$/.test(digit));
 
   if (!isValid || trimmedOtp.length !== 6) {
@@ -39,19 +40,36 @@ export default function SignUpOtpPage() {
     return;
   }
 
-  const code = trimmedOtp.join("");
+  // 🔑 Get the JWT you saved from sign up
+  const token = localStorage.getItem("signup_token");
+  if (!token) {
+    toast.error("Session expired. Please sign up again.");
+    return;
+  }
 
   setIsLoading(true);
-  setTimeout(() => {
-    setIsLoading(false);
+  console.log("📦 OTP PAGE TOKEN:", token);
 
-    if (code === "123456") {
+  try {
+    const res = await fetch("/api/user/signup/verify-otp", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ token, enteredOtp: code }),
+    });
+    const data = await res.json();
+
+    if (res.ok) {
       toast.success("OTP Verified!");
-      router.push("/forgotpass/newPass");     //palitan nyo nalang yung path kung saan kayo pupunta after OTP verification
-    } else {                                   
-      toast.error("Invalid OTP. Try again.");
+      router.push("/login"); 
+    } else {
+      toast.error(data.message || "Invalid OTP. Try again.");
     }
-  }, 1000);
+  } catch (err) {
+    console.error(err);
+    toast.error("Something went wrong.");
+  } finally {
+    setIsLoading(false);
+  }
 };
 
 
@@ -87,7 +105,7 @@ export default function SignUpOtpPage() {
                 {otp.map((digit, i) => (
                   <input
                     key={i}
-                    ref={(el) => (inputRefs.current[i] = el)}
+                    ref={(el) => { inputRefs.current[i] = el; }}
                     type="text"
                     inputMode="numeric"
                     maxLength={1}

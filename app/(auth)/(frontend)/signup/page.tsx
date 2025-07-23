@@ -158,7 +158,44 @@ export default function Signup() {
     const MobileNumber = `+63${mobileInput.slice(1)}`;
     console.log("Form submitted:", { ...formData, Position: finalPosition, MobileNumber });
 
-    router.push("/signup/OTP");
+    const payload = {
+      Firstname,
+      Lastname,
+      Email,
+      Password,
+      Sex,
+      Department,
+      Position: finalPosition,
+      EmployeeID,
+      MobileNumber,
+    };
+
+    fetch("/api/user/signup", {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify(payload),
+})
+.then(async (res) => {
+  const data = await res.json();
+
+  if (!res.ok) {
+    console.error(data);
+    alert(data.message);
+    return;
+  }
+
+  console.log("✅ Server response:", data);
+
+  // ✅ Save the JWT for OTP verification
+  localStorage.setItem("signup_token", data.token);
+
+  // ✅ Go to OTP page
+  router.push("/signup/OTP");
+})
+.catch((err) => {
+  console.error("❌ Request failed:", err);
+  alert("Something went wrong.");
+});
   };
 
   return (
