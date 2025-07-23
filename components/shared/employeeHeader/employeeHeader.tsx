@@ -10,7 +10,7 @@ export default function EmployeeHeader({ onToggleSidebar }: HeaderProps) {
   return (
     <header className={styles.header}>
       <div className={styles.headerLeft}>
-        <img src="/full-logo.png" alt="Logo" className={styles.logo} />
+        <img src="/dms-logo.png" alt="Logo" className={styles.logo} />
       </div>
 
       <div className={styles.headerRight}>
