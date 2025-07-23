@@ -3,6 +3,9 @@
 import Head from 'next/head'
 import styles from './document.module.css'
 import { useState } from 'react';
+import EmployeeSidebar from "@/components/shared/employeeSidebar/employeeSidebar";
+import EmployeeHeader from "@/components/shared/employeeHeader/employeeHeader";
+
 
 const documents = [
   {
@@ -38,40 +41,13 @@ export default function Document() {
         <title className={styles.title}>Document</title>
       </Head>
 
-      <header className={styles.header}>
-        <div className={styles.headerLeft}>
-          <img src="/full-logo.png" alt="Logo" className={styles.logo} />
-       
-        </div>
+       <EmployeeHeader onToggleSidebar={() => setSidebarOpen(!sidebarOpen)} />
+      
 
-
-        <div className={styles.headerRight}>
-          <span>Welcome, Kurt Macaranas</span>
-          <div>
-            <img src="/profile.png" alt="Profile" className={styles.profilePic} />
-          </div>
-
-          {/* Hamburger Button */}
-          <button
-            className={styles.hamburger}
-            onClick={() => setSidebarOpen(!sidebarOpen)}
-          >
-            ☰
-          </button>
-        </div>
-      </header>
+      
 
       <div className={styles.container}>
-        <aside className={styles.sidebar}>
-          <p className={styles.role}>👤 IT COORDINATOR</p>
-          <ul>
-            <li>📂 Dashboard</li>
-            <li className={styles.active}>📄 My Documents</li>
-            <li>🕘 History</li>
-            <li>⚙️ Settings</li>
-          </ul>
-        </aside>
-
+<EmployeeSidebar sidebarOpen={sidebarOpen} />
 
 
 

@@ -1,6 +1,9 @@
-
+"use client";
 import Head from 'next/head'
 import styles from './history.module.css'
+import { useState } from 'react';
+import EmployeeSidebar from "@/components/shared/employeeSidebar/employeeSidebar";
+import EmployeeHeader from "@/components/shared/employeeHeader/employeeHeader";
 
 const documents = [
   {
@@ -37,6 +40,7 @@ const documents = [
 
 
 export default function History() {
+    const [sidebarOpen, setSidebarOpen] = useState(false); // Add this line
   return (
    <>
    <div className={styles.Maincontainer}> 
@@ -44,37 +48,10 @@ export default function History() {
         <title className={styles.title}>Document</title>
       </Head>
 
-      <header className={styles.header}>
-        <div className={styles.headerLeft}>
-          <img src="/full-logo.png" alt="Logo" className={styles.logo} />
-       
-        </div>
-
-
-        <div className={styles.headerRight}>
-          <span>Welcome, Kurt Macaranas</span>
-          <div>
-            <img src="/profile.png" alt="Profile" className={styles.profilePic} />
-            
-          </div>
-        </div>
-
-        
-      </header>
+       <EmployeeHeader onToggleSidebar={() => setSidebarOpen(!sidebarOpen)} />
 
       <div className={styles.container}>
-        <aside className={styles.sidebar}>
-          <p className={styles.role}>👤 IT COORDINATOR</p>
-          <ul>
-            <li>📂 Dashboard</li>
-            <li>📄 My Documents</li>
-            <li className={styles.active}>🕘 History</li>
-            <li>⚙️ Settings</li>
-          </ul>
-        </aside>
-
-
-
+        <EmployeeSidebar sidebarOpen={sidebarOpen} />
 
         <main className={styles.main}>
      <div className={styles.Maincontainer}>

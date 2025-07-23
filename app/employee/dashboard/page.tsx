@@ -3,6 +3,8 @@
 import Head from 'next/head'
 import { useState } from 'react';
 import styles from './employee.module.css'
+import EmployeeSidebar from "@/components/shared/employeeSidebar/employeeSidebar";
+import EmployeeHeader from "@/components/shared/employeeHeader/employeeHeader";
 
 export default function Dashboard() {
 
@@ -14,41 +16,13 @@ export default function Dashboard() {
         <title className={styles.title}>Dashboard</title>
       </Head>
 
-      <header className={styles.header}>
-        <div className={styles.headerLeft}>
-          <img src="/full-logo.png" alt="Logo" className={styles.logo} />
-        </div>
+          <EmployeeHeader onToggleSidebar={() => setSidebarOpen(!sidebarOpen)} />
 
-        <div className={styles.headerRight}>
-          <span>Welcome, Kurt Macaranas</span>
-          <div>
-            <img src="/profile.png" alt="Profile" className={styles.profilePic} />
-          </div>
 
-          {/* Hamburger Button */}
-          <button
-            className={styles.hamburger}
-            onClick={() => setSidebarOpen(!sidebarOpen)}
-          >
-            ☰
-          </button>
-        </div>
-      </header>
+     
 
       <div className={styles.container}>
-        {/* Sidebar */}
-        <aside
-          className={`${styles.sidebar} ${sidebarOpen ? styles.sidebarOpen : ''}`}
-        >
-          <p className={styles.role}>👤 IT COORDINATOR</p>
-          <ul>
-            <li className={styles.active}>📂 Dashboard</li>
-            <li>📄 My Documents</li>
-            <li>🕘 History</li>
-            <li>⚙️ Settings</li>
-          </ul>
-        </aside>
-
+<EmployeeSidebar sidebarOpen={sidebarOpen} />
         <main className={styles.main}>
           <h2>Dashboard</h2>
 
