@@ -1,57 +1,66 @@
-// import { NextResponse } from "next/server";
-// import { hash } from "bcryptjs";
-// import { db } from "@/lib/db";
+import { NextResponse } from "next/server";
+import crypto from "crypto";
+import { sign } from "jsonwebtoken";
+import { sendVerificationEmail } from "@/lib/email";
 
-// export async function POST(req: Request) {
-//   const body = await req.json();
+const JWT_SECRET = process.env.JWT_SECRET!;
 
-//   const {
-//     Firstname,
-//     Lastname,
-//     Email,
-//     Password,
-//     Sex,
-//     Department,
-//     Position,
-//     EmployeeID,
-//     MobileNumber,
-//   } = body;
+export async function POST(req: Request) {
+  const body = await req.json();
 
-//   // VALIDATION
-//   if (!Firstname || !Lastname || !Email || !Password || !Sex || !Department || !Position || !EmployeeID || !MobileNumber) {
-//     return NextResponse.json({ message: "Missing required fields." }, { status: 400 });
-//   }
+  const {
+    Firstname,
+    Lastname,
+    Email,
+    Password,
+    Sex,
+    Department,
+    Position,
+    EmployeeID,
+    MobileNumber,
+  } = body;
 
-//   if (!Email.endsWith("@cvsu.edu.ph")) {
-//     return NextResponse.json({ message: "Invalid email domain." }, { status: 400 });
-//   }
+  if (
+    !Firstname || !Lastname || !Email || !Password || !Sex ||
+    !Department || !Position || !EmployeeID || !MobileNumber
+  ) {
+    return NextResponse.json({ message: "Missing required fields." }, { status: 400 });
+  }
 
-//   // Hash password
-//   const hashedPassword = await hash(Password, 10);
+  if (!Email.endsWith("@cvsu.edu.ph")) {
+    return NextResponse.json({ message: "Invalid email domain." }, { status: 400 });
+  }
 
-//   //  Determine role
-//   const adminTitles = ["President", "Vice President", "Director", "Assistant Director", "Dean"];
-//   const role = adminTitles.includes(Position) ? "Admin" : "Employee";
+  // ✅ Generate OTP
+  const otp = crypto.randomInt(100000, 999999).toString();
 
-//   try {
-//     const user = await db.user.create({
-//       data: {
-//         Firstname: Firstname,
-//         lastName: Lastname,
-//         email: Email,
-//         password: hashedPassword,
-//         sex: Sex,
-//         departmentId: parseInt(Department),
-//         position: Position,
-//         employeeId: EmployeeID,
-//         mobileNumber: MobileNumber,
-//         role, 
-//       },
-//     });
+  // ✅ Sign JWT with OTP + user data
+  const payload = {
+    Firstname,
+    Lastname,
+    Email,
+    Password,
+    Sex,
+    Department,
+    Position,
+    EmployeeID,
+    MobileNumber,
+    otp,
+  };
 
-//     return NextResponse.json({ message: "Account created!", userId: user.id }, { status: 201 });
-//   } catch (error) {
-//     console.error(error);
-//     return NextResponse.json({ message: "Something went wrong." }, { status: 500 });
-//   }
-// }
+  const token = sign(payload, JWT_SECRET, { expiresIn: "15m" });
+
+  // ✅ Send OTP email
+  console.log(`📧 Sending OTP ${otp} to ${Email}`);
+  console.log("✅ Reached SMTP call");
+  console.log(`Sending email with OTP: ${otp} to: ${Email}`);
+  await sendVerificationEmail({ to: Email, otp });
+  console.log(`✅ OTP email function called`);
+  console.log("JWT_SECRET:", JWT_SECRET);
+  console.log("✅ Signing JWT payload:", payload);
+  console.log("✅ Generated token:", token);
+  
+
+  // ✅ Return JWT to client
+  return NextResponse.json({ message: "OTP sent!", token }, { status: 200 });
+}
