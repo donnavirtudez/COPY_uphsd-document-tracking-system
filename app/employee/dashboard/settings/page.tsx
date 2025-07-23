@@ -1,7 +1,13 @@
+"use client";
 import Head from 'next/head'
 import styles from './settings.module.css'
+import { useState } from 'react';
+import EmployeeSidebar from "@/components/shared/employeeSidebar/employeeSidebar";
+import EmployeeHeader from "@/components/shared/employeeHeader/employeeHeader";
 
 export default function Setting() {
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+
   return (
     <>
       <div className={styles.Maincontainer}>
@@ -9,29 +15,14 @@ export default function Setting() {
           <title>Setting</title>
         </Head>
 
-        <header className={styles.header}>
-          <div className={styles.headerLeft}>
-            <img src="/full-logo.png" alt="Logo" className={styles.logo} />
-          </div>
+          <EmployeeHeader onToggleSidebar={() => setSidebarOpen(!sidebarOpen)} />
+        
 
-          <div className={styles.headerRight}>
-            <span>Welcome, Kurt Macaranas</span>
-            <div>
-              <img src="/profile.png" alt="Profile" className={styles.profilePic} />
-            </div>
-          </div>
-        </header>
 
+         
         <div className={styles.container}>
-          <aside className={styles.sidebar}>
-            <p className={styles.role}>👤 IT COORDINATOR</p>
-            <ul>
-              <li>📂 Dashboard</li>
-              <li>📄 My Documents</li>
-              <li>🕘 History</li>
-              <li className={styles.active}>⚙️ Settings</li>
-            </ul>
-          </aside>
+          <EmployeeSidebar sidebarOpen={sidebarOpen} />
+          
 
          <main className={styles.main}>
   <div className={styles.headerRow}>
