@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { useState } from "react";
-import styles from "./header.module.css";
+import styles from "../header.module.css";
 import Search from "./search";
 import { Menu, X } from "lucide-react";
 

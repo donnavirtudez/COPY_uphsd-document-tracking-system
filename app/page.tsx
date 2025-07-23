@@ -1,10 +1,14 @@
 import Image from "next/image";
 import styles from "./styles/styles.module.css";
-import Header from "@/components/shared/adminHeader";
+import Header from "@/components/shared/Header";
 import { FileText, Eye, Settings, ClipboardList } from "lucide-react";
+import DelayedRender from "../components/DelayedRender";
+
+
 
 
 export default function Home() {
+
   const cards = [
     {
       icon: <FileText size={48} className={styles.icon} />,
@@ -50,8 +54,10 @@ export default function Home() {
       desc: "Authorized personnel can review, sign, and forward documents electronically.",
     },
   ];
+  
 
   return (
+    <DelayedRender delay={2000}>
     <div>
       <Header />
       <div className={`${styles.parallaxSection} ${styles.parallax1}`}>
@@ -115,5 +121,6 @@ export default function Home() {
         </p>
       </footer>
     </div>
+    </DelayedRender>
   );
 }
