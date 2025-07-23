@@ -1,0 +1,115 @@
+.background {
+  height: 100vh;
+  width: 100%;
+  background-image: url('/bg-perps2.jpg');
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.overlay {
+  background-color: rgba(127, 20, 22, 0.9);
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  padding: 1rem;
+}
+
+.columns {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 3rem;
+}
+
+.left {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.code {
+  font-size: 6rem;
+  font-weight: bold;
+  color: #fccb0a;
+  margin: 0;
+}
+
+.divider {
+  width: 4px;
+  height: 100px;
+  background-color: #fccb0a;
+}
+
+.text {
+  font-size: 2rem;
+  text-align: left;
+  font-weight: 600;
+  margin: 0.2rem 0;
+}
+
+.Btn {
+  position: relative;
+  background-color: #7a0c1b;
+  color: white;
+  padding: 10px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  margin-top: 20px;
+  overflow: hidden;
+  z-index: 1;
+  box-shadow: 0 4px 10px rgba(255, 255, 255, 0.4);
+  transition: color 0.3s ease;
+}
+
+.Btn::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background-color: #FCCB0A;
+  transition: left 0.4s ease;
+  z-index: -1;
+}
+
+.Btn:hover::before {
+  left: 0;
+}
+
+.Btn:hover {
+  color: black; 
+}
+
+
+/* mobile respo */
+@media (max-width: 768px) {
+  .columns {
+    gap: 1rem;
+    max-width: 100%;
+  }
+
+  .code {
+    font-size: 4rem;
+  }
+
+  .text {
+    font-size: 1.3rem;
+  }
+}

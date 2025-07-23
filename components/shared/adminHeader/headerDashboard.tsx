@@ -1,8 +1,8 @@
 "use client";
 
 import Image from "next/image";
-import styles from "./header.module.css";
-import Search from "./search";
+import styles from "../header.module.css";
+import Search from "../Header/search";
 
 export default function HeaderDashboard() {
   
@@ -13,7 +13,7 @@ export default function HeaderDashboard() {
   return (
     <header className={styles.header}>
       <div className={styles.logoWrapper}>
-        <Image src="/logo-dashboard.png" alt="Logo Icon" width={300} height={240} />
+        <Image src="/dms-logo.png" alt="Logo Icon" width={200} height={200} />
       </div>
 
       <div className={styles.rightWrapper}>

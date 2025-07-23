@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import styles from "./header.module.css";
+import styles from "../header.module.css";
 import { X, Search } from "lucide-react";
 
 export default function SearchBar() {

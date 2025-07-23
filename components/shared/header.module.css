@@ -3,10 +3,10 @@
   justify-content: space-between;
   align-items: center;
   background-color: #871919;
-  padding: 0 100px;
+  padding: 0 5%;
   color: white;
   position: relative;
-  height: 100px;
+  height: 80px;
 }
 
 .logoWrapper {
