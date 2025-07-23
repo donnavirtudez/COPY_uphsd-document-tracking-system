@@ -92,6 +92,7 @@ export default function History() {
 
 
  {/* table */}
+        <div className={styles.MainTable}>
     <div className={styles.containerTable}>
       <table className={styles.table}>
         <thead>
@@ -129,6 +130,7 @@ export default function History() {
           ))}
         </tbody>
       </table>
+    </div>
     </div>
     </div>
 
